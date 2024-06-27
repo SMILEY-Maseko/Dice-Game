@@ -53,7 +53,7 @@ function editNames(){
      innerHTML = player1;
 
      document.querySelector("p.player2")
-     .innerHTML = player1; 
+     .innerHTML = player2; 
 
 
 }
