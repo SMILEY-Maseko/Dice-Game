@@ -37,3 +37,24 @@ if (player1Score > player2Score) {
 } else if (player2Score > player1Score) {
   document.querySelector("h1").innerHTML = "Player 2 Wins!";
 } else document.querySelector("h1").innerHTML = "It's a draw...";
+
+let player1 = "Player 1";
+let player2 = "Player 2";
+
+function editNames(){
+  player1 = prompt("Change Player 1 Name")
+  player2 = prompt("Change Player 2 Name")
+
+  if(player1.length<1 || player2.length <1){
+    alert('please enter valid name');
+    return;
+  }
+   document.querySelector("p.player1")
+     innerHTML = player1;
+
+     document.querySelector("p.player1")
+     innerHTML = player1; 
+
+
+}
+
