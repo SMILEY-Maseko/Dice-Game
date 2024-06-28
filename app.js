@@ -57,4 +57,6 @@ function editNames(){
 
 
 }
+// Load initial player names from localStorage
+loadNames();
 
