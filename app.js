@@ -142,20 +142,6 @@ function rollDice() {
   document.getElementById('current-score').textContent = currentScore;
 }
 
-function holdScore() {
-  scores[activePlayer - 1] += currentScore;
-  currentScore = 0;
-
-  document.getElementById(`player${activePlayer}-total-score`).textContent = scores[activePlayer - 1];
-  document.getElementById('current-score').textContent = currentScore;
-
-  if (scores[activePlayer - 1] >= goalScore) {
-    document.getElementById('result').textContent = `${activePlayer === 1 ? player1 : player2} wins!`;
-    disableButtons();
-  } else {
-    switchPlayer();
-  }
-}
 //functions to switch players
 function switchPlayer() {
   activePlayer = activePlayer === 1 ? 2 : 1;
@@ -166,7 +152,13 @@ function disableButtons() {
   document.querySelector('button[onclick="rollDice()"]').disabled = true;
   document.querySelector('button[onclick="holdScore()"]').disabled = true;
 }
-
+if (dice1 > dice2) {
+  document.getElementById('result').textContent = `${player1} wins with a score of ${dice1}!`;
+} else if (dice2 > dice1) {
+  document.getElementById('result').textContent = `${player2} wins with a score of ${dice2}!`;
+} else {
+  document.getElementById('result').textContent = "It's a draw!";
+}
 
 // Load initial player names from localStorage
 loadNames();
