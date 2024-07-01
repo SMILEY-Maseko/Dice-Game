@@ -2,6 +2,10 @@
 
 let player1 = "Player 1";
 let player2 = "Player 2";
+let currentScore = 0;
+let activePlayer = 1;
+const scores = [0, 0];
+const goalScore = 100;
 
 // Function to save player names to localStorage
 function saveNames() {
@@ -86,6 +90,82 @@ if (player1Score > player2Score) {
   document.querySelector("h1").innerHTML = "Player 2 Wins!";
 } else document.querySelector("h1").innerHTML = "It's a draw...";
 
+function saveNames() {
+  localStorage.setItem("player1", player1);
+  localStorage.setItem("player2", player2);
+}
+
+function loadNames() {
+  player1 = localStorage.getItem("player1") || "Player 1";
+  player2 = localStorage.getItem("player2") || "Player 2";
+  document.querySelector("p.player1").innerHTML = player1;
+  document.querySelector("p.player2").innerHTML = player2;
+}
+
+loadNames();
+
+function editNames() {
+  player1 = prompt("Change Player 1 Name", player1);
+  player2 = prompt("Change Player 2 Name", player2);
+
+  if (player1 && player1.trim().length > 0) {
+    player1 = player1;
+  } else {
+    alert('Please enter a valid name for Player 1');
+    return;
+  }
+
+  if (player2 && player2.trim().length > 0) {
+    player2 = player2;
+  } else {
+    alert('Please enter a valid name for Player 2');
+    return;
+  }
+
+  document.querySelector("p.player1").innerHTML = player1;
+  document.querySelector("p.player2").innerHTML = player2; 
+
+  saveNames();
+}
+//Function for Rolling the dice
+function rollDice() {
+  const player1Score = Math.floor(Math.random() * 6) + 1;
+  const player2Score = Math.floor(Math.random() * 6) + 1;
+
+  const firstDice = document.querySelector(".img1");
+  const secondDice = document.querySelector(".img2");
+
+  firstDice.setAttribute("src", `images/dice${player1Score}.png`);
+  secondDice.setAttribute("src", `images/dice${player2Score}.png`);
+
+  currentScore += player1Score + player2Score;
+  document.getElementById('current-score').textContent = currentScore;
+}
+
+function holdScore() {
+  scores[activePlayer - 1] += currentScore;
+  currentScore = 0;
+
+  document.getElementById(`player${activePlayer}-total-score`).textContent = scores[activePlayer - 1];
+  document.getElementById('current-score').textContent = currentScore;
+
+  if (scores[activePlayer - 1] >= goalScore) {
+    document.getElementById('result').textContent = `${activePlayer === 1 ? player1 : player2} wins!`;
+    disableButtons();
+  } else {
+    switchPlayer();
+  }
+}
+//functions to switch players
+function switchPlayer() {
+  activePlayer = activePlayer === 1 ? 2 : 1;
+  document.getElementById('result').textContent = `${activePlayer === 1 ? player1 : player2}'s turn!`;
+}
+
+function disableButtons() {
+  document.querySelector('button[onclick="rollDice()"]').disabled = true;
+  document.querySelector('button[onclick="holdScore()"]').disabled = true;
+}
 
 
 // Load initial player names from localStorage
