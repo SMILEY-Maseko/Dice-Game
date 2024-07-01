@@ -87,7 +87,6 @@ if (player1Score > player2Score) {
 
 
 
-
 // Load initial player names from localStorage
 loadNames();
 
