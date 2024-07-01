@@ -26,14 +26,29 @@
   </div>
 
   <div class="container bottom">
-    <button type="button" class="btn" onclick="editNames()">EDIT NAMES</button>
-    
+    <button type="button" class="btn" onclick="editNames()">EDIT NAMES</button><br><br>
   </div>
-
-  <div class="btn container">
-    <button type="button">Roll Dice</button>
+  <div class ="container bottom">
+    <button type="button" class="btn" onclick="rollDice()"> Roll Dice</button>
+    </div>
+    <div class="container bottom">
     
-  </div>
+        <h2>Score Sheet</h2>
+        <table>
+            <tr>
+                <th>Player</th>
+                <th>Score</th>
+            </tr>
+            <tr>
+                <td>Player 1</td>
+                <td id="player1-score">0</td>
+            </tr>
+            <tr>
+                <td>Player 2</td>
+                <td id="player2-score">0</td>
+            </tr>
+        </table>
+    </div>
 <footer>
   🎲 Dice Game by Lerato, Lefitlhile and Wakhekhile 🎲
 </footer>

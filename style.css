@@ -52,3 +52,25 @@
     text-decoration: none;
   }
   
+
+  .score-sheet {
+    margin-top: 20px;
+}
+
+table {
+    width: 50%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: rgb(116, 140, 150);
+    background-color: ;
+    color: white;
+}
