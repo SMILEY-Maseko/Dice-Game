@@ -1,4 +1,5 @@
 // Declare player variables and assign default values
+
 let player1 = "Player 1";
 let player2 = "Player 2";
 
