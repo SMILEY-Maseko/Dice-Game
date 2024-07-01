@@ -129,20 +129,24 @@ function editNames() {
 }
 //Function for Rolling the dice
 function rollDice() {
-  const player1Score = Math.floor(Math.random() * 6) + 1;
-  const player2Score = Math.floor(Math.random() * 6) + 1;
+  const dice1 = Math.floor(Math.random() * 6) + 1;
+  const dice2 = Math.floor(Math.random() * 6) + 1;
 
   const firstDice = document.querySelector(".img1");
   const secondDice = document.querySelector(".img2");
 
-  firstDice.setAttribute("src", `images/dice${player1Score}.png`);
-  secondDice.setAttribute("src", `images/dice${player2Score}.png`);
+  firstDice.setAttribute("src", `images/dice${dice1}.png`);
+  secondDice.setAttribute("src", `images/dice${dice2}.png`);
 
-  currentScore += player1Score + player2Score;
-  document.getElementById('current-score').textContent = currentScore;
+  document.getElementById('dice1').textContent = dice1;
+  document.getElementById('dice2').textContent = dice2;
+// Function updates the score 
+  if (dice1 > dice2) {
+    document.getElementById('result').textContent = `${player1} wins with a score of ${dice1}!`;
+  } else if (dice2 > dice1) {
+    document.getElementById('result').textContent = `${player2} wins with a score of ${dice2}!`;
+  } else {
+    document.getElementById('result').textContent = "It's a draw!";
+  }
 }
-
-
-// Load initial player names from localStorage
-loadNames();
 
