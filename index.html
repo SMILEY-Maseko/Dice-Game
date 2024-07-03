@@ -1,50 +1,111 @@
-<html lang="en" dir="ltr"><head>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
   <meta charset="utf-8">
   <title>Dice-Game</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet">
-
 </head>
-
 <body>
-
   <div class="container">
-    
     <h1>It's a draw...</h1>
     <p>Let The Game Begin!</p>
 
     <div class="dice">
       <p class="player1">Player 1</p>
-      <img class="img1" src="images/dice1.png">
+      <img class="img1" src="images/dice1.png" alt="Dice 1">
     </div>
 
     <div class="dice">
       <p class="player2">Player 2</p>
-      <img class="img2" src="images/dice1.png">
+      <img class="img2" src="images/dice1.png" alt="Dice 2">
     </div>
-
   </div>
 
   <div class="container bottom">
-    <button type="button" class="btn" onclick="editNames()">Edit Names</button><br><br>
+    <button type="button" class="btn edit" onclick="editNames()">Edit Names</button><br><br>
+    <button type="button" class="btn roll" onclick="rollDice()">Roll Dice</button><br><br>
   </div>
-  <div class ="container bottom">
-    <button type="button" class="btn" onclick="rollDice()"> Roll Dice</button><br><br>
+
+  <div class="container bottom">
+    <div class="scoreboard">
+      <p>Player 1 Roll: <span id="dice1">0</span></p>
+      <p>Player 2 Roll: <span id="dice2">0</span></p>
+      <p id="result">Press "Roll the Dice" to start!</p>
     </div>
+  </div>
   
-    <div class="container bottom">
-    
-      <div class="scoreboard">
-        <p>Player 1 Roll: <span id="dice1">0</span></p>
-        <p>Player 2 Roll: <span id="dice2">0</span></p>
-        <p id="result">Press "Roll the Dice" to start!</p>
-    </div>
-    </div>
-<footer>
-  🎲 Dice Game by Lerato, Lefitlhile and Wakhekhile 🎲
-</footer>
+  <footer>
+    🎲 Dice Game by Lerato, Lefitlhile and Wakhekhile 🎲
+  </footer>
 
-<script src="app.js"></script>
+  <script>
+    // Declare player variables and assign default values
+    let player1 = "Player 1";
+    let player2 = "Player 2";
 
+    // Function to save player names to localStorage
+    function saveNames() {
+      localStorage.setItem("player1", player1);
+      localStorage.setItem("player2", player2);
+    }
 
-</body></html>
+    // Function to load player names from localStorage
+    function loadNames() {
+      player1 = localStorage.getItem("player1") || "Player 1";
+      player2 = localStorage.getItem("player2") || "Player 2";
+      document.querySelector("p.player1").textContent = player1;
+      document.querySelector("p.player2").textContent = player2;
+    }
+
+    // Call the function to load names when the page loads
+    loadNames();
+
+    // Function to edit player names
+    function editNames() {
+      player1 = prompt("Change Player 1 Name", player1) || player1;
+      player2 = prompt("Change Player 2 Name", player2) || player2;
+
+      if (player1.trim().length === 0) {
+        alert('Please enter a valid name for Player 1');
+        return;
+      }
+
+      if (player2.trim().length === 0) {
+        alert('Please enter a valid name for Player 2');
+        return;
+      }
+
+      document.querySelector("p.player1").textContent = player1;
+      document.querySelector("p.player2").textContent = player2;
+
+      // Save the new names to localStorage
+      saveNames();
+    }
+
+    // Function for rolling the dice
+    function rollDice() {
+      const dice1 = Math.floor(Math.random() * 6) + 1;
+      const dice2 = Math.floor(Math.random() * 6) + 1;
+
+      const firstDice = document.querySelector(".img1");
+      const secondDice = document.querySelector(".img2");
+
+      firstDice.setAttribute("src", `images/dice${dice1}.png`);
+      secondDice.setAttribute("src", `images/dice${dice2}.png`);
+
+      document.getElementById('dice1').textContent = dice1;
+      document.getElementById('dice2').textContent = dice2;
+
+      // Function updates the score 
+      if (dice1 > dice2) {
+        document.querySelector("h1").textContent = `${player1} wins with a score of ${dice1}!`;
+      } else if (dice2 > dice1) {
+        document.querySelector("h1").textContent = `${player2} wins with a score of ${dice2}!`;
+      } else {
+        document.querySelector("h1").textContent = "It's a draw...";
+      }
+    }
+  </script>
+</body>
+</html>
