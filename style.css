@@ -7,8 +7,10 @@
   .dice {
     text-align: center;
     display: inline-block;
-    margin: 10px;
-  
+    margin: 5px;
+    width: 100px; 
+    height: 100px; 
+
   }
   
   body {
@@ -20,7 +22,7 @@
     margin: 5px;
     font-family: 'Lobster', cursive;
     text-shadow: 2px 0 #232931;
-    font-size: 8rem;
+    font-size: 4rem;
     color: #060707;
     text-align: center;
   }
